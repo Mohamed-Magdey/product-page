@@ -1,12 +1,12 @@
-image: alpine:latest
+image: node:12.17.0
 
 pages:
-  stage: deploy
   script:
-  - echo 'Nothing to do...'
+    - gem install bundler
+    - bundle install
+    - bundle exec jekyll build -d public
   artifacts:
     paths:
-      - "index.html"
-    expire_in: 1 day
+      - public
   only:
   - master
