@@ -23,11 +23,11 @@
                     <li v-for="detail in details">{{detail}}</li>
                 </ul>
 
-                <div v-for="varient in varients" 
+                <div v-for="(varient, index) in varients" 
                     :key="varient.varientId"
                     class="color-box"
                     :style="{backgroundColor: varient.varientColor}"
-                    @mouseover="updateProduct(varient.varientImage)"
+                    @mouseover="updateProduct(index)"
                 >
                 </div>
 
