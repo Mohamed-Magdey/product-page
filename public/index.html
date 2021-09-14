@@ -17,7 +17,7 @@
             <div class="product-info">
                 <h1>{{product}}</h1>
                 <p v-if="inStock">In Stock</p>
-                <p v-else>Out of Stock</p>
+                <p v-else :class="{outOfStock: !inStock}">Out of Stock</p>
 
                 <ul>
                     <li v-for="detail in details">{{detail}}</li>
@@ -31,8 +31,16 @@
                 >
                 </div>
 
-                <button @click="addToCart">Add To Cart</button>
-                <button @click="removeFromCart" :class="cart === 0 ? 'disabledButton' : ''">Remove From Cart</button>
+                <button @click="addToCart"
+                    :disabled="!inStock"
+                    :class="{disabledButton: !inStock}"
+                >Add To Cart</button>
+                <button @click="removeFromCart" 
+                    :disabled="!Boolean(cart)"
+                    :class="{disabledButton: !Boolean(cart)}"
+                >
+                    Remove From Cart
+                </button>
 
 
                 <div class="cart">

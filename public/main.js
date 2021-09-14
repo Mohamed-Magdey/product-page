@@ -35,6 +35,7 @@ let app = new Vue({
             if(this.cart !== 0) {
                 this.cart--;
             }
+            console.log('hello')
         }
     }
 })
