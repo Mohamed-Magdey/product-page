@@ -1,6 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        brand: 'Vue Mastery',
         product: 'Socks',
         image: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
         inStock: true,
@@ -35,7 +36,12 @@ let app = new Vue({
             if(this.cart !== 0) {
                 this.cart--;
             }
-            console.log('hello')
+        }
+    },
+
+    computed: {
+        title() {
+            return `${this.brand} ${this.product}`;
         }
     }
 })
