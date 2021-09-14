@@ -77,7 +77,12 @@ Vue.component('product', {
 
     methods: {
         addToCart() {
-            this.$emit('add-to-cart', this.varients[this.selectedVarient].varientId);
+            let varient = this.varients[this.selectedVarient];
+
+            if(varient.varientQuantity > 0) {
+                this.$emit('add-to-cart', varient.varientId);
+                varient.varientQuantity -= 1;
+            }
         },
 
         updateProduct(index) {
@@ -85,7 +90,9 @@ Vue.component('product', {
         },
 
         removeFromCart() {
+            let varient = this.varients[this.selectedVarient];
             this.$emit('remove-from-cart', this.varients[this.selectedVarient].varientId);
+            varient.varientQuantity += 1; 
         }
     },
 
