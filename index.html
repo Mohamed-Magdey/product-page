@@ -23,11 +23,12 @@
                     <li v-for="detail in details">{{detail}}</li>
                 </ul>
 
-                <div v-for="varient in varients" :key="varient.varientId">
-                    <p class="color-box" 
-                    :class="varient.varientColor"
+                <div v-for="varient in varients" 
+                    :key="varient.varientId"
+                    class="color-box"
+                    :style="{backgroundColor: varient.varientColor}"
                     @mouseover="updateProduct(varient.varientImage)"
-                    ></p>
+                >
                 </div>
 
                 <button @click="addToCart">Add To Cart</button>
