@@ -3,6 +3,11 @@ Vue.component('product', {
         premium: {
             type: Boolean,
             required: true
+        },
+        cart: {
+            type: Number,
+            required: true,
+            default: 0
         }
     },
     template: `
@@ -38,11 +43,6 @@ Vue.component('product', {
                 >
                     Remove From Cart
                 </button>
-
-
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
-                </div>
             </div>
         </div>
     `,
@@ -67,14 +67,12 @@ Vue.component('product', {
                     varientQuantity: 0
                 }
             ],
-
-            cart: 0
         }
     },
 
     methods: {
         addToCart() {
-            this.cart++;
+            this.$emit('add-to-cart', this.varients[this.selectedVarient].varientId);
         },
 
         updateProduct(index) {
@@ -82,9 +80,7 @@ Vue.component('product', {
         },
 
         removeFromCart() {
-            if(this.cart !== 0) {
-                this.cart--;
-            }
+            this.$emit('remove-from-cart', this.varients[this.selectedVarient].varientId);
         }
     },
 
@@ -110,6 +106,20 @@ Vue.component('product', {
 let app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        },
+        decreaseCart(id) {
+            if(this.cart !== 0) {
+                const index = this.cart.indexOf(id);
+                if (index > -1) {
+                    this.cart.splice(index, 1);
+                }
+            }
+        }
     }
 })
